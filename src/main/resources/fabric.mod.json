@@ -1,0 +1,25 @@
+{
+  "schemaVersion": 1,
+  "id": "ecopower",
+  "version": "${version}",
+  "name": "EcoPower",
+  "description": "",
+  "authors": [],
+  "contact": {},
+  "license": "All-Rights-Reserved",
+  "icon": "assets/ecopower/icon.png",
+  "environment": "server",
+  "entrypoints": {
+    "fabric-datagen": [
+      "org.xznetwork.ecopower.client.EcopowerDataGenerator"
+    ],
+    "main": [
+      "org.xznetwork.ecopower.EcoPower"
+    ]
+  },
+  "depends": {
+    "fabricloader": ">=${loader_version}",
+    "fabric": "*",
+    "minecraft": "${minecraft_version}"
+  }
+}
