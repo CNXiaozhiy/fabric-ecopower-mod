@@ -39,21 +39,21 @@ public class ConfigManager {
                 Config.PlanEntry powerSaver = new Config.PlanEntry();
                 powerSaver.setGuid(detector.detectPowerSaverGuid());
                 powerSaver.setRange(new int[]{Integer.MIN_VALUE, 0});
-                powerSaver.setBroadcastMessage("§a[Eco Power] §7服务器已切换至§a节能模式");
+                powerSaver.setBroadcastMessage("§a[Eco Power] §7witched to §aPower Saver Mode");
                 defaultPlans.put("power_saver", powerSaver);
 
                 // Balanced
                 Config.PlanEntry balanced = new Config.PlanEntry();
                 balanced.setGuid(detector.detectBalancedGuid());
                 balanced.setRange(new int[]{1, 2});
-                balanced.setBroadcastMessage("§a[Eco Power] §7服务器已切换至§e平衡模式");
+                balanced.setBroadcastMessage("§a[Eco Power] §7Switched to §eBalanced Mode");
                 defaultPlans.put("balanced", balanced);
 
                 // High Performance
                 Config.PlanEntry highPerformance = new Config.PlanEntry();
                 highPerformance.setGuid(detector.detectHighPerformanceGuid());
                 highPerformance.setRange(new int[]{3, Integer.MAX_VALUE});
-                highPerformance.setBroadcastMessage("§a[Eco Power] §7服务器已切换至§c高性能模式");
+                highPerformance.setBroadcastMessage("§a[Eco Power] §7Switched to §cHigh Performance Mode");
                 defaultPlans.put("high_performance", highPerformance);
 
                 config.setPlan(defaultPlans);
@@ -102,7 +102,6 @@ public class ConfigManager {
                         config.setExclude(excludeObj);
                     }
 
-                    // 加载广播开关
                     if (data.containsKey("broadcastChanges")) {
                         config.setBroadcastChanges((boolean) data.get("broadcastChanges"));
                     }

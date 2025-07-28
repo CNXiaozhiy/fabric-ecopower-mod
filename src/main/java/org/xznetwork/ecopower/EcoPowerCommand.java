@@ -4,6 +4,7 @@ import com.mojang.brigadier.Command;
 import com.mojang.brigadier.arguments.StringArgumentType;
 import com.mojang.brigadier.context.CommandContext;
 import com.mojang.brigadier.suggestion.SuggestionProvider;
+import net.minecraft.server.command.CommandManager;
 import net.minecraft.server.command.ServerCommandSource;
 import net.minecraft.server.network.ServerPlayerEntity;
 import net.minecraft.text.MutableText;
@@ -187,13 +188,11 @@ public class EcoPowerCommand implements Command<ServerCommandSource> {
                 }
             }
 
-            // 添加分隔线
             context.getSource().sendFeedback(() ->
                             Text.literal("-----------------------")
                                     .formatted(Formatting.DARK_GRAY),
                     false);
 
-            // 显示当前活动计划信息
             MutableText currentInfo = Text.literal("Current Active: ")
                     .formatted(Formatting.GRAY)
                     .append(Text.literal(currentGuid != null ? currentGuid : "None")
@@ -286,26 +285,26 @@ public class EcoPowerCommand implements Command<ServerCommandSource> {
         };
 
         dispatcher.register(
-                net.minecraft.server.command.CommandManager.literal("ecopower")
+               CommandManager.literal("ecopower")
                         .requires(source -> source.hasPermissionLevel(4)) // OP only
-                        .then(net.minecraft.server.command.CommandManager.literal("reload")
+                        .then(CommandManager.literal("reload")
                                 .executes(new EcoPowerCommand(mod))
                         )
-                        .then(net.minecraft.server.command.CommandManager.literal("show")
+                        .then(CommandManager.literal("show")
                                 .executes(new EcoPowerCommand(mod)) // /ecopower show (all)
-                                .then(net.minecraft.server.command.CommandManager.literal("plans")
+                                .then(CommandManager.literal("plans")
                                         .executes(new EcoPowerCommand(mod)) // /ecopower show plans
                                 )
-                                .then(net.minecraft.server.command.CommandManager.literal("exclusion")
+                                .then(CommandManager.literal("exclusion")
                                             .executes(new EcoPowerCommand(mod)) // /ecopower show exclusion
                                 )
-                                .then(net.minecraft.server.command.CommandManager.literal("activation")
+                                .then(CommandManager.literal("activation")
                                         .executes(new EcoPowerCommand(mod)) // /ecopower show activation
                                 )
                         )
-                        .then(net.minecraft.server.command.CommandManager.literal("set")
-                                .then(net.minecraft.server.command.CommandManager.literal("plan")
-                                        .then(net.minecraft.server.command.CommandManager.argument("planName", StringArgumentType.string())
+                        .then(CommandManager.literal("set")
+                                .then(CommandManager.literal("plan")
+                                        .then(CommandManager.argument("planName", StringArgumentType.string())
                                                 .suggests(planSuggester)
                                                 .executes(context -> {
                                                     String planName = StringArgumentType.getString(context, "planName");
